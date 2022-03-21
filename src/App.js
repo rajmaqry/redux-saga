@@ -1,30 +1,25 @@
 import "./styles.css";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "./_redux_apis/selectors";
-import { useActions } from "./_redux_apis/actions/callActions";
+import Analytics from "./elements/analytics/Analytics";
+import NavBar from "./nav/NavBar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function App() {
-  const { loading, posts, error } = useSelector(getAllPosts);
-  const { fetchPostRequest } = useActions();
-
-  useEffect(() => {
-    fetchPostRequest();
-  }, []);
-
   return (
-    <div className="App">
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error</div>
-      ) : (
-        posts?.map((todo, index) => (
-          <div key={todo.id}>
-            {++index}. {todo.title}
-          </div>
-        ))
-      )}
-    </div>
+    <Router>
+      <NavBar>
+        <Routes>
+          <Route path="/" element={<p>ok</p>} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/compute" element={<Analytics />} />
+          <Route path="/dataconfig" element={<p />} />
+          <Route path="/ingestion" element={<Analytics />} />
+          <Route path="/tables" element={<Analytics />} />
+          <Route path="/transformation" element={<Analytics />} />
+          <Route path="/validation" element={<Analytics />} />
+          <Route path="/sql" element={<Analytics />} />
+          <Route path="*" element={<> not found</>} />
+        </Routes>
+      </NavBar>
+    </Router>
   );
 }

@@ -10,7 +10,7 @@ import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 export const routes = [
   {
     path: "/",
-    name: "/dashboard",
+    name: "Dashboard",
     icon: <DashboardCustomizeIcon />
   },
   {
