@@ -67,15 +67,18 @@ const Drawer = styled(MuiDrawer, {
 const ListItem = withStyles({
   root: {
     "&$selected": {
-      backgroundColor: "red",
+      backgroundColor: "red !important",
       color: "white",
       "border-right": "4px solid #90caf9",
       "& .MuiListItemIcon-root": {
-        color: "white"
+        color: "#80cbc4"
+      },
+      "& MuiListItem-root.Mui-selected": {
+        backgroundColor: "red"
       }
     },
     "&$selected:hover": {
-      backgroundColor: "#c51162",
+      backgroundColor: "#c51162 !important",
       color: "white",
       "& .MuiListItemIcon-root": {
         color: "white"
