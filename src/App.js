@@ -5,7 +5,6 @@ import { getAllPosts } from "./_redux_apis/selectors";
 import { useActions } from "./_redux_apis/actions/callActions";
 
 export default function App() {
-  const dispatch = useDispatch();
   const { loading, posts, error } = useSelector(getAllPosts);
   const { fetchPostRequest } = useActions();
 
