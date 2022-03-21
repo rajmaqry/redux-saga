@@ -50,7 +50,7 @@ export const routes = [
   },
   {
     path: "/sql",
-    name: "SQL",
+    name: "SQLL",
     icon: <QueryBuilderIcon />
   }
 ];

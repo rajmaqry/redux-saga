@@ -17,6 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import MuiListItem from "@material-ui/core/ListItem";
 
 const drawerWidth = 240;
 
@@ -84,6 +85,32 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme)
   })
 }));
+const ListItem = withStyles({
+  root: {
+    "&$selected": {
+      backgroundColor: "red",
+      color: "white",
+      "& .MuiListItemIcon-root": {
+        color: "white"
+      }
+    },
+    "&$selected:hover": {
+      backgroundColor: "purple",
+      color: "white",
+      "& .MuiListItemIcon-root": {
+        color: "white"
+      }
+    },
+    "&:hover": {
+      backgroundColor: "blue",
+      color: "white",
+      "& .MuiListItemIcon-root": {
+        color: "white"
+      }
+    }
+  },
+  selected: {}
+})(MuiListItem);
 
 export default function MiniDrawer() {
   const theme = useTheme();
