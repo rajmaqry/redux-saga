@@ -2,10 +2,11 @@ import "./styles.css";
 import Analytics from "./elements/analytics/Analytics";
 import NavBar from "./nav/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import HeaderBar from "./components/Headerbar";
 export default function App() {
   return (
     <Router>
+      <HeaderBar />
       <NavBar>
         <Routes>
           <Route path="/" element={<p>ok</p>} />
