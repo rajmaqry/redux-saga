@@ -14,6 +14,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MuiListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 import { routes } from "./rconf";
 
 const drawerWidth = 240;
@@ -55,6 +56,7 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
+  "& .MuiPaper-root": { top: "60px" },
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme)
@@ -69,9 +71,9 @@ const ListItem = withStyles({
     "&$selected": {
       backgroundColor: "red !important",
       color: "white",
-      "border-right": "4px solid #90caf9",
+      "border-right": "5px solid #66bb6a",
       "& .MuiListItemIcon-root": {
-        color: "#80cbc4"
+        color: "white"
       },
       "& MuiListItem-root.Mui-selected": {
         backgroundColor: "red"
@@ -90,13 +92,14 @@ const ListItem = withStyles({
       "border-radius": "4px",
       "border-left": "4px solid rgb(240, 103, 103)",
       "& .MuiListItemIcon-root": {
-        color: "white"
+        color: "black"
       }
     }
   },
   selected: {}
 })(MuiListItem);
 const useStyles = styled((theme) => ({
+  toolbar: theme.mixins.toolbar,
   drawerPaper: { width: "inherit" },
   link: {
     textDecoration: "none",
@@ -121,22 +124,22 @@ export default function NavBar({ children }) {
     setSelectedIndex(index);
   };
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} style={{ "margin-top": "70px" }}>
       <CssBaseline />
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        edge="start"
-        sx={{
-          marginRight: 5,
-          ...(open && { display: "none" })
-        }}
-      >
-        <MenuIcon />
-      </IconButton>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: "none" })
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
           <IconButton
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -146,6 +149,16 @@ export default function NavBar({ children }) {
           >
             <MenuIcon />
           </IconButton>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            sx={{
+              ...(!open && { display: "none" })
+            }}
+          >
+            D a t a E n g i n e e r i n g
+          </Typography>
           <IconButton
             onClick={handleDrawerClose}
             sx={{
@@ -200,7 +213,7 @@ export default function NavBar({ children }) {
         </List>
         <Divider />
       </Drawer>
-      <main>{children}</main>
+      <main style={{ "margin-top": "0px" }}>{children}</main>
     </Box>
   );
 }

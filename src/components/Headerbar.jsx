@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     animation: "spin 4s linear infinite"
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: 1400, //theme.zIndex.drawer + 5,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -43,13 +43,16 @@ const useStyles = makeStyles((theme) => ({
     })
   }
 }));
-
+////className={clsx(classes.appBar)}
 export default function HeaderBar() {
   const classes = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="flex" className={clsx(classes.appBar)}>
-        <Toolbar>
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <Toolbar sx={{ toolbar: (theme) => theme.mixins.toolbar }}>
           <IconButton
             size="large"
             edge="start"
@@ -66,7 +69,7 @@ export default function HeaderBar() {
               `}</style>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Data Engineering And Analytics
+            A S S E R T
           </Typography>
           <Button color="inherit">About</Button>
         </Toolbar>
