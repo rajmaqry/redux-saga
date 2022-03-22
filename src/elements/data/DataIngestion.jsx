@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { INGESTION_ENDPOINTS } from "./data_ingestions";
 import SubHeader from "../../components/SubHeader";
 import { IngestionOptions } from "./IngestionOptions";
 import Grid from "@mui/material/Grid";
@@ -14,16 +13,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary
 }));
 const DataIngestion = () => {
-  const [selected, setSelected] = useState(INGESTION_ENDPOINTS["Select"].text);
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
   };
+  //  const [selected, setSelected] = useState(INGESTION_ENDPOINTS["Select"].text);
+  // const handleSelect = (e) => {
+  //   setSelected(e.target.value);
+  // };
   const [inputValues, setInputValues] = useState({});
   const [counter, setCounter] = useState(0);
 
   const handleClick = () => {
     setCounter(counter + 1);
     console.log(counter);
+    setOpen(true);
   };
 
   const handleOnChange = (e) => {
@@ -50,7 +54,7 @@ const DataIngestion = () => {
       })}
       {Array.from(Array(counter)).map((c, index) => {
         return (
-          <AModal>
+          <AModal toopen={open} handleModalClose={handleClose}>
             <Item onChange={handleOnChange} key={c} className={index}>
               {<IngestionOptions />}
             </Item>
