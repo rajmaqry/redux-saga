@@ -2,9 +2,10 @@ import * as React from "react";
 import { Component } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import basetheme from "./theme";
+import basetheme, { APaper } from "./theme";
 import { ThemeProvider } from "@mui/styles";
 import { AButton, AAppBar } from "./theme";
+import Grid from "@mui/material/Grid";
 
 export default class SubHeader extends Component {
   constructor(props) {
@@ -19,29 +20,26 @@ export default class SubHeader extends Component {
     const isButton = this.props.addButton;
     return (
       <ThemeProvider theme={basetheme}>
-        <ThemeProvider theme={basetheme}>
-          <AAppBar position="static">
-            <Toolbar>
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{ flexGrow: 1 }}
+        <AAppBar position="static">
+          <Toolbar>
+            <Typography
+              variant="subtitle1"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              {this.props.display}
+            </Typography>
+            {isButton && (
+              <AButton
+                color="inherit"
+                startIcon={this.props.buttonIcon}
+                onClick={(e) => handleEvent(e)}
               >
-                {this.props.display}
-              </Typography>
-
-              {isButton && (
-                <AButton
-                  color="inherit"
-                  startIcon={this.props.buttonIcon}
-                  onClick={(e) => handleEvent(e)}
-                >
-                  {this.props.buttonText}
-                </AButton>
-              )}
-            </Toolbar>
-          </AAppBar>
-        </ThemeProvider>
+                {this.props.buttonText}
+              </AButton>
+            )}
+          </Toolbar>
+        </AAppBar>
       </ThemeProvider>
     );
   }

@@ -15,6 +15,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MuiListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
+import Toolbar from "@mui/material/Toolbar";
 import { routes } from "./rconf";
 
 const drawerWidth = 240;
@@ -125,98 +126,110 @@ export default function NavBar({ children }) {
   };
   const [hover, sethover] = React.useState(false);
   return (
-    <Box sx={{ display: "flex" }} style={{ "margin-top": "70px" }}>
-      <CssBaseline />
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" })
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <IconButton
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            sx={{
-              ...(open && { display: "none" })
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            sx={{
-              ...(!open && { display: "none" })
-            }}
-          >
-            D a t a E n g i n e e r i n g
-          </Typography>
-          <IconButton
-            onClick={handleDrawerClose}
-            sx={{
-              ...(!open && { display: "none" })
-            }}
-          >
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {routes.map((route, index) => (
-            <Link
-              to={route.path}
-              key={index}
-              style={{
-                textDecoration: "none",
-                font: "Roboto",
-                color: "#26c6da"
+    <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex" }} style={{ "margin-top": "70px" }}>
+        <CssBaseline />
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" })
               }}
             >
-              <ListItem
-                selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}
+              <MenuIcon />
+            </IconButton>
+            <IconButton
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              sx={{
+                ...(open && { display: "none" })
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              component="div"
+              sx={{
+                ...(!open && { display: "none" })
+              }}
+            >
+              D a t a E n g i n e e r i n g
+            </Typography>
+            <IconButton
+              onClick={handleDrawerClose}
+              sx={{
+                ...(!open && { display: "none" })
+              }}
+            >
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {routes.map((route, index) => (
+              <Link
+                to={route.path}
                 key={index}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5
+                style={{
+                  textDecoration: "none",
+                  font: "Roboto",
+                  color: "#26c6da"
                 }}
               >
-                <ListItemIcon
-                  onMouseOver={() => sethover(true)}
-                  onMouseOut={() => sethover(false)}
+                <ListItem
+                  selected={selectedIndex === index}
+                  onClick={(event) => handleListItemClick(event, index)}
+                  key={index}
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center"
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5
                   }}
                 >
-                  {route.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={route.name}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <Divider />
-      </Drawer>
-      <main style={{ "margin-top": "0px" }}>{children}</main>
+                  <ListItemIcon
+                    onMouseOver={() => sethover(true)}
+                    onMouseOut={() => sethover(false)}
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center"
+                    }}
+                  >
+                    {route.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={route.name}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+          <Divider />
+        </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` }
+        }}
+      >
+        <Toolbar />
+        <main style={{ "margin-top": "0px" }}>{children}</main>
+      </Box>
     </Box>
   );
 }

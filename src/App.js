@@ -1,5 +1,6 @@
 import "./styles.css";
 import Analytics from "./elements/analytics/Analytics";
+import DataIngestion from "./elements/data/DataIngestion";
 import NavBar from "./nav/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HeaderBar from "./components/Headerbar";
@@ -19,7 +20,7 @@ export default function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/compute" element={<Analytics />} />
           <Route path="/dataconfig" element={<p />} />
-          <Route path="/ingestion" element={<Analytics />} />
+          <Route path="/ingestion" element={<DataIngestion />} />
           <Route path="/tables" element={<Analytics />} />
           <Route path="/transformation" element={<Analytics />} />
           <Route path="/validation" element={<Analytics />} />

@@ -28,6 +28,18 @@ export const AFormPaper = styled(Paper)(({ theme }) => ({
   height: 300,
   lineHeight: "80px"
 }));
+export const ModalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "600",
+  bgcolor: "background.paper",
+  border: "0px solid #000",
+  boxShadow: 24,
+  p: 4
+};
+
 export const AButton = styled(Button)({
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   border: 0,

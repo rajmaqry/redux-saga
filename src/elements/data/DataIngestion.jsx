@@ -5,6 +5,7 @@ import { IngestionOptions } from "./IngestionOptions";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
+import AModal from "../../components/Modal";
 import { styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -32,39 +33,31 @@ const DataIngestion = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={4}
-      direction="column"
-      justifyContent="center"
-      alignItems="strech"
-    >
-      <Grid item xs={12}>
-        <SubHeader
-          display="Configure you data ingestion points"
-          addButton="ture"
-          buttonText="Create new"
-          buttonClick={() => handleClick()}
-          buttonIcon={<AddIcon />}
-        />
-      </Grid>
+    <div>
+      <SubHeader
+        display="Configure you data ingestion points"
+        addButton="ture"
+        buttonText="Create new"
+        buttonClick={() => handleClick()}
+        buttonIcon={<AddIcon />}
+      />
       {Object.keys(inputValues).map((c) => {
         return (
-          <Grid item xs={12}>
+          <Grid item xs={16}>
             {inputValues[c]}
           </Grid>
         );
       })}
       {Array.from(Array(counter)).map((c, index) => {
         return (
-          <Grid item xs={12}>
+          <AModal>
             <Item onChange={handleOnChange} key={c} className={index}>
               {<IngestionOptions />}
             </Item>
-          </Grid>
+          </AModal>
         );
       })}
-    </Grid>
+    </div>
   );
 };
 
