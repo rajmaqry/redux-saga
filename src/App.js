@@ -24,6 +24,8 @@ export default function App() {
           <Route path="/transformation" element={<Analytics />} />
           <Route path="/validation" element={<Analytics />} />
           <Route path="/sql" element={<Analytics />} />
+          <Route path="/jobs" element={<Analytics />} />
+          <Route path="/tasks" element={<Analytics />} />
           <Route path="*" element={<> not found</>} />
         </Routes>
       </NavBar>

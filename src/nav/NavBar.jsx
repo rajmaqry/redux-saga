@@ -123,6 +123,7 @@ export default function NavBar({ children }) {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
+  const [hover, sethover] = React.useState(false);
   return (
     <Box sx={{ display: "flex" }} style={{ "margin-top": "70px" }}>
       <CssBaseline />
@@ -195,6 +196,8 @@ export default function NavBar({ children }) {
                 }}
               >
                 <ListItemIcon
+                  onMouseOver={() => sethover(true)}
+                  onMouseOut={() => sethover(false)}
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : "auto",

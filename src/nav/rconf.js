@@ -7,6 +7,8 @@ import BackupTableIcon from "@mui/icons-material/BackupTable";
 import TransformIcon from "@mui/icons-material/Transform";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import AirIcon from "@mui/icons-material/Air";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 export const routes = [
   {
     path: "/",
@@ -50,7 +52,17 @@ export const routes = [
   },
   {
     path: "/sql",
-    name: "SQLL",
+    name: "SQL",
     icon: <QueryBuilderIcon />
+  },
+  {
+    path: "/jobs",
+    name: "Jobs",
+    icon: <AirIcon />
+  },
+  {
+    path: "/tasks",
+    name: "Tasks",
+    icon: <ListAltIcon />
   }
 ];
