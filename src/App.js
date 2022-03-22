@@ -3,10 +3,16 @@ import Analytics from "./elements/analytics/Analytics";
 import NavBar from "./nav/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HeaderBar from "./components/Headerbar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
+
 export default function App() {
   return (
     <Router>
-      <HeaderBar />
+      <ThemeProvider theme={theme}>
+        <HeaderBar />
+      </ThemeProvider>
       <NavBar>
         <Routes>
           <Route path="/" element={<p>ok</p>} />

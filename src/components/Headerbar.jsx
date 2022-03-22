@@ -9,9 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import basetheme from "./theme";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { makeStyles } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+//import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex"
@@ -48,32 +47,30 @@ const useStyles = makeStyles((theme) => ({
 export default function HeaderBar() {
   const classes = useStyles();
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="flex" className={clsx(classes.appBar)}>
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <AcUnitIcon className={classes.rotateIcon} />
-              <style>{`
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="flex" className={clsx(classes.appBar)}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <AcUnitIcon className={classes.rotateIcon} />
+            <style>{`
                   @keyframes spin {
                       0% { transform: rotate(360deg); }
                       100% { transform: rotate(0deg); }
                   }
               `}</style>
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Data Engineering And Analytics
-            </Typography>
-            <Button color="inherit">About</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </ThemeProvider>
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Data Engineering And Analytics
+          </Typography>
+          <Button color="inherit">About</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
