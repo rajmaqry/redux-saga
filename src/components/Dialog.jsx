@@ -12,6 +12,7 @@ export default function ADialog(props) {
       <DialogTitle>{props.displaytext}</DialogTitle>
       <DialogContent>
         <DialogContentText>{props.content}</DialogContentText>
+        <span style={{ marginRight: "10px" }}></span>
         {props.children}
       </DialogContent>
       <DialogActions>

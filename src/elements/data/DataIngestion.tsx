@@ -4,7 +4,6 @@ import { IngestionOptions } from "./IngestionOptions";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
-import AModal from "../../components/Modal";
 import ADialog from "../../components/Dialog";
 import { styled } from "@mui/material/styles";
 
@@ -82,7 +81,7 @@ const DataIngestion = () => {
             extraHandleExtra={saveIngestiontask}
             handleClose={handleDClose}
           >
-            <Item>{<IngestionOptions />}</Item>
+            {<IngestionOptions />}
           </ADialog>
         );
       })}
