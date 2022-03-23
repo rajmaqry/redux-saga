@@ -22,11 +22,13 @@ export const APaper = styled(Paper)(({ theme }) => ({
 }));
 
 export const AFormPaper = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
+  // ...theme.typography.body2,
   textAlign: "center",
-  color: theme.palette.text.secondary,
+  // color: theme.palette.text.secondary,
   height: 300,
-  lineHeight: "80px"
+  width: 500,
+  lineHeight: "80px",
+  marginTop: "10px"
 }));
 export const ModalStyle = {
   position: "absolute",

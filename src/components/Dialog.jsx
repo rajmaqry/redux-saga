@@ -8,11 +8,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function ADialog(props) {
   return (
-    <Dialog open={props.open} onClose={props.handleClose}>
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      sx={{ maxWidth: "700" }}
+    >
       <DialogTitle>{props.displaytext}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{props.content}</DialogContentText>
-        <span style={{ marginRight: "10px" }}></span>
+        <DialogContentText sx={{ marginBottom: "10px" }}>
+          {props.content}
+        </DialogContentText>
+        <span style={{}}></span>
         {props.children}
       </DialogContent>
       <DialogActions>
