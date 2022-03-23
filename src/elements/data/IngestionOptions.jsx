@@ -15,17 +15,14 @@ export const IngestionOptions = (props) => {
   const [s3AssumeRole, setS3AssumeRole] = useState(false);
   const handleFieldChange = (field, e) => {
     field(e.target.value);
-    console.log(s3path);
-    s3AssumeRole && console.log(s3AssumeRole);
   };
   const handleFieldChangeCheck = (field, e) => {
-    console.log(e);
-    console.log(e.target.checked);
+    // console.log(s3path);
     field(e.target.checked);
   };
   const [selected, setSelected] = useState(INGESTION_ENDPOINTS["Select"].text);
   const handleSelect = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     setSelected(e.target.value);
   };
   const isSelected = selected !== "Select" ? true : false;
@@ -46,6 +43,7 @@ export const IngestionOptions = (props) => {
                 inputProps={{ style: { fontSize: 12 } }}
                 sx={{ width: 200 }}
                 onChange={(e) => handleFieldChange(setS3Path, e)}
+                value={s3path}
               />
             </Grid>
             <Grid item xs={15}>
