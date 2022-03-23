@@ -13,6 +13,12 @@ export const IngestionOptions = (props) => {
   const label = { inputProps: { "aria-label": "AWS Assume Role" } };
   const [s3path, setS3Path] = useState("");
   const [s3AssumeRole, setS3AssumeRole] = useState(false);
+  const [s3AccessKey, sets3AccessKey] = useState("");
+  const [s3SecretKey, sets3SecretKey] = useState("");
+  const [s3SessionKey, sets3SessionKey] = useState("");
+  const [s3ProxyHost, sets3ProxyHost] = useState("");
+  const [s3ProxyPort, sets3ProxyPort] = useState("");
+  const [s3AssuemRoleArn, setS3AssuemRoleArn] = useState("");
   const handleFieldChange = (field, e) => {
     field(e.target.value);
   };
@@ -30,31 +36,133 @@ export const IngestionOptions = (props) => {
     switch (selected) {
       case "AWSS3":
         return (
-          <Grid container spacing={2} columns={30}>
-            <Grid item xs={15}>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="s3path"
-                label="S3 Path"
-                type="s3path"
-                fullWidth
-                variant="standard"
-                inputProps={{ style: { fontSize: 12 } }}
-                sx={{ width: 200 }}
-                onChange={(e) => handleFieldChange(setS3Path, e)}
-                value={s3path}
-              />
+          <div>
+            <Grid container spacing={2} columns={30}>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3path"
+                  label="S3 Path"
+                  type="s3path"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(setS3Path, e)}
+                  value={s3path}
+                />
+              </Grid>
+              <Grid item xs={15}>
+                <Checkbox
+                  label="Use AWS Assume Role"
+                  size="small"
+                  onChange={(e) => handleFieldChangeCheck(setS3AssumeRole, e)}
+                />
+                Use AWS Assume Role
+              </Grid>
             </Grid>
-            <Grid item xs={15}>
-              <Checkbox
-                label="Use AWS Assume Role"
-                size="small"
-                onChange={(e) => handleFieldChangeCheck(setS3AssumeRole, e)}
-              />
-              Use AWS Assume Role
+            <Grid container spacing={2} columns={30}>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3AssuemRoleArn"
+                  label="S3 Assume Role ARN"
+                  type="s3Arole"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(setS3AssuemRoleArn, e)}
+                  value={s3AssuemRoleArn}
+                  disabled={!s3AssumeRole}
+                />
+              </Grid>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3AccessKey"
+                  label="S3 Access Key"
+                  type="s3AKey"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(sets3AccessKey, e)}
+                  value={s3AccessKey}
+                  disabled={s3AssumeRole}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+            <Grid container spacing={2} columns={30}>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3SecretKey"
+                  label="S3 Secret Key"
+                  type="s3SKey"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(sets3SecretKey, e)}
+                  value={s3SecretKey}
+                  disabled={s3AssumeRole}
+                />
+              </Grid>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3AccessKey"
+                  label="S3 Access Key"
+                  type="s3AKey"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(sets3SessionKey, e)}
+                  value={s3SessionKey}
+                  disabled={s3AssumeRole}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2} columns={30}>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3ProxyHost"
+                  label="S3 Proxy Host"
+                  type="s3PHost"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(sets3ProxyHost, e)}
+                  value={s3ProxyHost}
+                />
+              </Grid>
+              <Grid item xs={15}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="s3ProxyPort"
+                  label="S3 Proxy Port"
+                  type="s3PPort"
+                  fullWidth
+                  variant="standard"
+                  inputProps={{ style: { fontSize: 12 } }}
+                  sx={{ width: 200 }}
+                  onChange={(e) => handleFieldChange(sets3ProxyPort, e)}
+                  value={s3ProxyPort}
+                />
+              </Grid>
+            </Grid>
+          </div>
         );
       default:
         return <p></p>;
