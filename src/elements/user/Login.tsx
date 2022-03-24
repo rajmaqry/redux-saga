@@ -10,20 +10,20 @@ import FaceIcon from "@mui/icons-material/Face";
 import Avatar from "@mui/material/Avatar";
 import { AFormPaper } from "../../components/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../../_redux_apis/selectors";
+import { getUser } from "../../_redux_apis/selectors";
 import { useActions } from "../../_redux_apis/actions/callActions";
 
-const Login = () => {
+const Login = (props) => {
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const { loading, user, error } = useSelector(getAllPosts);
+  const user = useSelector(getUser);
   const { fetchUserRequest } = useActions();
 
-  useEffect(() => {
-    fetchUserRequest();
-  }, []);
-  const signIn = () => {};
+  const signIn = (e) => {
+    fetchUserRequest(userName, password);
+    props.setUser(user);
+  };
 
   const paperStyle = {
     padding: 20,
