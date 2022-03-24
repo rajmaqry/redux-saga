@@ -1,12 +1,5 @@
 import { IPost } from "../models/IPost";
-
-export interface PostAction {
-  type: string;
-  payload?: any;
-  requestId?: string;
-  retries?: number;
-  retry_interval?: number;
-}
+import { AssertAction } from "../models/common";
 
 export const PostActions = {
   FETCH_POST_REQUEST: "FETCH_POST_REQUEST",
@@ -17,7 +10,7 @@ export interface FetchPostsSuccessPayload {
   posts: IPost[];
 }
 
-export const fetchPostRequest = (): PostAction => ({
+export const fetchPostRequest = (): AssertAction => ({
   type: PostActions.FETCH_POST_REQUEST
 });
 

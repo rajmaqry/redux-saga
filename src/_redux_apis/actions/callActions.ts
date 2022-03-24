@@ -2,14 +2,16 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchPostRequest } from "./postAction";
+import { fetchUserRequest } from "./userAction";
 
-const postCreator = {
-  fetchPostRequest
+const actionCreator = {
+  fetchPostRequest,
+  fetchUserRequest
 };
 
 export const useActions = () => {
   const dispatch = useDispatch();
   return useMemo(() => {
-    return bindActionCreators(postCreator, dispatch);
+    return bindActionCreators(actionCreator, dispatch);
   }, [dispatch]);
 };

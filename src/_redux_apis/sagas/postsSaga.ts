@@ -4,6 +4,7 @@ import {
   PostActions
 } from "../actions/postAction";
 import axios from "axios";
+import { API_ENDPONT } from "./common";
 import {
   all,
   call,
@@ -16,8 +17,6 @@ import {
 } from "redux-saga/effects";
 import { httpRequest } from "../util/http_util";
 import reduxSaga, { runSaga, SagaIterator } from "redux-saga";
-
-const API_ENDPONT = "https://jsonplaceholder.typicode.com";
 
 function* fetchPostsSaga() {
   try {

@@ -1,5 +1,5 @@
 import { State, defaultState } from "../state";
-import { PostActions } from "../../actions/postAction";
+import { UserActions } from "../../actions/userAction";
 import { AssertAction } from "../../models/common";
 const release_inprogress = (state: State, actionType: string): string[] => {
   const set = new Set<string>(state.inprogress);
@@ -21,26 +21,25 @@ export default (state: State = defaultState, action: AssertAction): State => {
   }
   console.log(state);
   switch (action.type) {
-    case PostActions.FETCH_POST_REQUEST:
-      const inprogress = [...state.inprogress, PostActions.FETCH_POST_REQUEST];
+    case UserActions.FETCH_USER_REQUEST:
+      const inprogress = [...state.inprogress, UserActions.FETCH_USER_REQUEST];
       return {
         ...state,
         loading: true,
         inprogress: inprogress
       };
-    case PostActions.FETCH_POST_SUCCESS:
+    case UserActions.FETCH_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        posts: action.payload,
+        user: action.payload,
         error: null,
-        inprogress: release_inprogress(state, PostActions.FETCH_POST_REQUEST)
+        inprogress: release_inprogress(state, UserActions.FETCH_USER_REQUEST)
       };
-    case PostActions.FETCH_POST_FAILURE:
+    case UserActions.FETCH_USER_FAILURE:
       return {
         ...state,
         loading: false,
-        posts: [],
         error: action.payload.error
       };
     default:
