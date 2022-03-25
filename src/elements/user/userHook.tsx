@@ -4,12 +4,13 @@ export default function useUser() {
   const getToken = () => {
     const userString = sessionStorage.getItem("user");
     const user = JSON.parse(userString);
-    return user.token;
+    //console.log(user);
+    return user?.token;
   };
   const getUser = () => {
     const userString = sessionStorage.getItem("user");
     const user = JSON.parse(userString);
-    // console.log(user);
+    console.log(user);
     return user;
   };
 

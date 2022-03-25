@@ -25,7 +25,7 @@ export const AFormPaper = styled(Paper)(({ theme }) => ({
   // ...theme.typography.body2,
   textAlign: "center",
   // color: theme.palette.text.secondary,
-  height: 700,
+  height: 1000,
   width: 500,
   lineHeight: "80px",
   marginTop: "10px"

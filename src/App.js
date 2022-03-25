@@ -1,4 +1,5 @@
 import "./styles.css";
+import React, { useEffect } from "react";
 import Analytics from "./elements/analytics/Analytics";
 import DataIngestion from "./elements/data/DataIngestion";
 import NavBar from "./nav/NavBar";
@@ -7,13 +8,24 @@ import HeaderBar from "./components/Headerbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useUser from "./elements/user/userHook";
 import Login from "./elements/user/Login";
+import { SelectWorkspace } from "./elements/workspace/Workspace";
 const theme = createTheme();
 
 export default function App() {
+  //sessionStorage.clear();
   const { token, user, setUser } = useUser();
-
-  if (!token || !user) {
+  const [workspace, selectWorkspace] = React.useState("");
+  if (!user || !token) {
+    console.log(user);
     return <Login setUser={setUser} />;
+  }
+  if (user.workspace_map.length > 0) {
+    return (
+      <SelectWorkspace
+        workspaces={user.workspace_map}
+        selected={selectWorkspace}
+      />
+    );
   }
 
   return (
