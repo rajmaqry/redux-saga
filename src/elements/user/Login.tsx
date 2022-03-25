@@ -9,18 +9,21 @@ import TextField from "@mui/material/TextField";
 import FaceIcon from "@mui/icons-material/Face";
 import Avatar from "@mui/material/Avatar";
 import { AFormPaper } from "../../components/theme";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../_redux_apis/selectors";
+import { useSelector } from "react-redux";
+import { getUser, getAllState } from "../../_redux_apis/selectors";
 import { useActions } from "../../_redux_apis/actions/callActions";
 
 const Login = (props) => {
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const user = useSelector(getUser);
+  const { user } = useSelector(getUser);
   const { fetchUserRequest } = useActions();
-
+  useEffect(() => {
+    fetchUserRequest(userName, password);
+  }, [user]);
   const signIn = (e) => {
+    console.log(user);
     fetchUserRequest(userName, password);
     props.setUser(user);
   };

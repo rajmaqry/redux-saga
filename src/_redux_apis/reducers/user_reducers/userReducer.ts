@@ -1,6 +1,7 @@
 import { State, defaultState } from "../state";
 import { UserActions } from "../../actions/userAction";
 import { AssertAction } from "../../models/common";
+import { IUser } from "../../models/user";
 const release_inprogress = (state: State, actionType: string): string[] => {
   const set = new Set<string>(state.inprogress);
   set.delete(actionType);
@@ -19,20 +20,14 @@ export default (state: State = defaultState, action: AssertAction): State => {
     };
     requestChanged = true;
   }
-  console.log(state);
+  //console.log(state);
   switch (action.type) {
-    case UserActions.FETCH_USER_REQUEST:
-      const inprogress = [...state.inprogress, UserActions.FETCH_USER_REQUEST];
-      return {
-        ...state,
-        loading: true,
-        inprogress: inprogress
-      };
     case UserActions.FETCH_USER_SUCCESS:
+      const user: IUser = action.payload;
       return {
         ...state,
         loading: false,
-        user: action.payload,
+        user: Object.assign(user),
         error: null,
         inprogress: release_inprogress(state, UserActions.FETCH_USER_REQUEST)
       };

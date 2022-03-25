@@ -19,15 +19,15 @@ import reduxSaga, { runSaga, SagaIterator } from "redux-saga";
 import { AssertAction } from "../models/common";
 import { IUserRequest } from "../models/user";
 const dumUser =
-  '"data" : { "user_id": "demo","view_page_permissions": ["*"], "role_mappings":["*"], "password": "string", "password_last_changed": "24031022010123","first_name": "demo","last_name": "user","workspace_map": [{"workspace_id":"aa877s00-009nnuuw-12yby7q6hbu-0982113buss","workspace_name":"DemoWorkspace"}]}';
+  '{"data" : { "user_id": "demo","view_page_permissions": ["*"], "role_mappings":["*"], "password": "string", "password_last_changed": "24031022010123","first_name": "demo","last_name": "user","workspace_map": [{"workspace_id":"aa877s00-009nnuuw-12yby7q6hbu-0982113buss","workspace_name":"DemoWorkspace"}],"token":"223349jiji99220ijij00a81wss"}}';
 function* fetchUserSaga(action: AssertAction) {
   try {
-    const userReq = action.payload;
+    const userReq = JSON.stringify(action.payload);
     console.log(userReq);
     const response = JSON.parse(dumUser); //yield call(axios.get, `${API_ENDPONT}/todos`);
-    console.log(response.data);
-    const user = response.data;
-    console.log(user);
+    console.log("FROM SAGA" + response.data);
+    //const user = response.data;
+    // console.log( response.data);
     yield put(fetchUserSuccess(response.data));
   } catch (err) {
     yield put(fetchUserFailure(err.message));

@@ -5,10 +5,17 @@ import NavBar from "./nav/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HeaderBar from "./components/Headerbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import useUser from "./elements/user/userHook";
+import Login from "./elements/user/Login";
 const theme = createTheme();
 
 export default function App() {
+  const { token, user, setUser } = useUser();
+
+  if (!token || !user) {
+    return <Login setUser={setUser} />;
+  }
+
   return (
     <Router>
       <ThemeProvider theme={theme}>

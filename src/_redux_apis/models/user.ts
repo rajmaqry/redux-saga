@@ -7,6 +7,7 @@ export interface IUser {
   first_name: string;
   last_name: string;
   workspace_map: IWorkSpaceMap[];
+  token?: string;
 }
 
 export interface IWorkSpaceMap {

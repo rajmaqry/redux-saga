@@ -18,7 +18,7 @@ export const fetchUserRequest = (
   payload: { userId, password }
 });
 
-export const fetchUserSuccess = (user: IUser) => ({
+export const fetchUserSuccess = (user) => ({
   type: UserActions.FETCH_USER_SUCCESS,
   payload: user
 });

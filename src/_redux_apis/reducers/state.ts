@@ -4,7 +4,7 @@ export interface State {
   loading: boolean;
   inprogress: string[];
   error?: string;
-  posts?: string[];
+  posts?: string[] | null;
   user?: IUser;
   requests: { [requestId: string]: { [actionType: string]: any } };
 }
