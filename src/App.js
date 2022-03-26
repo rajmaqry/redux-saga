@@ -35,6 +35,7 @@ export default function App() {
   }, [workspaceSelected]);
   useEffect(() => {
     if (currentUser) {
+      setUser();
       setShowModeratorBoard(
         currentUser.role_mappings.includes("ROLE_MODERATOR") ||
           currentUser.role_mappings.includes("*")

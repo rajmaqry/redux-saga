@@ -20,7 +20,7 @@ function useUser() {
   };
 
   const saveUser = () => {
-    console.log("HOOK::::" + JSON.stringify(currentUser));
+    //console.log("HOOK::::" + JSON.stringify(currentUser));
     sessionStorage.setItem("user", JSON.stringify(currentUser));
     sessionStorage.setItem("token", JSON.stringify(currentUser?.token));
     setToken(currentUser?.token);
