@@ -10,24 +10,43 @@ import FaceIcon from "@mui/icons-material/Face";
 import Avatar from "@mui/material/Avatar";
 import { AFormPaper } from "../../components/theme";
 import { useSelector } from "react-redux";
-import { getUser, getAllState } from "../../_redux_apis/selectors";
+import { Navigate } from "react-router-dom";
+import {
+  getUser,
+  getIsloggedIn,
+  getMessage
+} from "../../_redux_apis/selectors";
 import { useActions } from "../../_redux_apis/actions/callActions";
 
 const Login = (props) => {
+  const form = React.useRef();
+  const checkBtn = React.useRef();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [submit, setSubmit] = React.useState(false);
 
+  const { loggedIn } = useSelector(getIsloggedIn);
+  const { loading } = useSelector(getIsloggedIn);
+  const { message } = useSelector(getMessage);
   const { user } = useSelector(getUser);
   const { fetchUserRequest } = useActions();
-  useEffect(() => {
-    fetchUserRequest(userName, password);
-  }, [user]);
+  // useEffect(() => {
+  //  if (submit) {
+  //     fetchUserRequest(userName, password);
+  //     setSubmit(false);
+  //   }
+  // }, [user]);
   const signIn = (e) => {
-    console.log(user);
+    e.preventDefault();
+    //console.log(user);
+    setSubmit(true);
     fetchUserRequest(userName, password);
-    props.setUser(user);
+    console.log("LOGIN:::" + user);
+    //props.setUser(user);
   };
-
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
   const paperStyle = {
     padding: 20,
     height: "70vh",

@@ -3,33 +3,81 @@ import React, { useEffect } from "react";
 import Analytics from "./elements/analytics/Analytics";
 import DataIngestion from "./elements/data/DataIngestion";
 import NavBar from "./nav/NavBar";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Switch
+} from "react-router-dom";
 import HeaderBar from "./components/Headerbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useUser from "./elements/user/userHook";
 import Login from "./elements/user/Login";
 import { SelectWorkspace } from "./elements/workspace/Workspace";
+import { history } from "./util/history";
+import EventBus from "./elements/user/EventBus";
+import AuthVerify from "./elements/user/AuthVerify";
+import { Navigate } from "react-router-dom";
 const theme = createTheme();
 
 export default function App() {
-  //sessionStorage.clear();
-  const { token, user, setUser } = useUser();
+  sessionStorage.clear();
+  const { token, setUser, currentUser, isLoggedIn, logOut } = useUser();
   const [workspace, selectWorkspace] = React.useState("");
-  if (!user || !token) {
-    console.log(user);
-    return <Login setUser={setUser} />;
-  }
-  if (user.workspace_map.length > 0) {
-    return (
-      <SelectWorkspace
-        workspaces={user.workspace_map}
-        selected={selectWorkspace}
-      />
-    );
-  }
+  const [moderator, setShowModeratorBoard] = React.useState(false);
+  const [admin, setShowAdmin] = React.useState(false);
+
+  useEffect(() => {
+    history.listen((location) => {
+      console.log(location);
+    });
+  }, []);
+  useEffect(() => {
+    if (currentUser) {
+      setShowModeratorBoard(
+        currentUser.role_mappings.includes("ROLE_MODERATOR") ||
+          currentUser.role_mappings.includes("*")
+      );
+      setShowAdmin(
+        currentUser.role_mappings.includes("ROLE_ADMIN") ||
+          currentUser.role_mappings.includes("*")
+      );
+    } else {
+      setShowModeratorBoard(false);
+      setShowAdmin(false);
+    }
+
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, [currentUser, logOut]);
+
+  // if (!isLoggedIn || AuthVerify(currentUser)) {
+  //   console.log(currentUser);
+  //   return (
+  //     <Router history={history}>
+
+  //     </Router>
+  //   );
+  // }
+  // if (currentUser.workspace_map.length > 0) {
+  //   return (
+  //     <SelectWorkspace
+  //       workspaces={currentUser.workspace_map}
+  //       selected={selectWorkspace}
+  //     />
+  //   );
+  // }
+  //  <Switch>
+  //<Route exact path="/login" component={Login} />
+  //</Switch>
 
   return (
-    <Router>
+    <Router history={history}>
       <ThemeProvider theme={theme}>
         <HeaderBar />
       </ThemeProvider>

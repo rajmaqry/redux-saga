@@ -6,6 +6,7 @@ export interface State {
   error?: string;
   posts?: string[] | null;
   user?: IUser;
+  isLoggedIn?: boolean;
   requests: { [requestId: string]: { [actionType: string]: any } };
 }
 export const defaultState: Readonly<State> = Object.freeze({

@@ -29,12 +29,14 @@ export default (state: State = defaultState, action: AssertAction): State => {
         loading: false,
         user: Object.assign(user),
         error: null,
+        isLoggedIn: true,
         inprogress: release_inprogress(state, UserActions.FETCH_USER_REQUEST)
       };
     case UserActions.FETCH_USER_FAILURE:
       return {
         ...state,
         loading: false,
+        isLoggedIn: false,
         error: action.payload.error
       };
     default:
