@@ -36,17 +36,18 @@ const Login = (props) => {
   //     setSubmit(false);
   //   }
   // }, [user]);
+  useEffect(() => {
+    // console.log("LOGIN:::" + JSON.stringify(user));
+  }, [user]);
   const signIn = (e) => {
     e.preventDefault();
-    //console.log(user);
     setSubmit(true);
     fetchUserRequest(userName, password);
-    console.log("LOGIN:::" + user);
+    //window.location.reload();
+    //console.log("LOGIN:::" + JSON.stringify(user));
     //props.setUser(user);
   };
-  if (loggedIn) {
-    return <Navigate to="/" />;
-  }
+
   const paperStyle = {
     padding: 20,
     height: "70vh",

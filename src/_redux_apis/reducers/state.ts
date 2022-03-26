@@ -5,7 +5,7 @@ export interface State {
   inprogress: string[];
   error?: string;
   posts?: string[] | null;
-  user?: IUser;
+  user?: IUser | null;
   isLoggedIn?: boolean;
   requests: { [requestId: string]: { [actionType: string]: any } };
 }

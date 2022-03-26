@@ -19,11 +19,11 @@ function useUser() {
     sessionStorage.removeItem("token");
   };
 
-  const saveUser = (user) => {
-    console.log("HOOK::::" + JSON.stringify(user));
-    sessionStorage.setItem("user", JSON.stringify(user));
-    sessionStorage.setItem("token", JSON.stringify(user?.token));
-    setToken(user?.token);
+  const saveUser = () => {
+    console.log("HOOK::::" + JSON.stringify(currentUser));
+    sessionStorage.setItem("user", JSON.stringify(currentUser));
+    sessionStorage.setItem("token", JSON.stringify(currentUser?.token));
+    setToken(currentUser?.token);
   };
 
   return {
