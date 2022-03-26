@@ -24,6 +24,7 @@ export default function App() {
   sessionStorage.clear();
   const { token, setUser, currentUser, isLoggedIn, logOut } = useUser();
   const [workspace, selectWorkspace] = React.useState("");
+  const [workspaceSelected, selected] = React.useState(false);
   const [moderator, setShowModeratorBoard] = React.useState(false);
   const [admin, setShowAdmin] = React.useState(false);
 
@@ -31,10 +32,8 @@ export default function App() {
     history.listen((location) => {
       console.log(location);
     });
-  }, []);
+  }, [workspaceSelected]);
   useEffect(() => {
-    console.log("CALLED" + currentUser?.token);
-    console.log("CALLED::" + isLoggedIn);
     if (currentUser) {
       setShowModeratorBoard(
         currentUser.role_mappings.includes("ROLE_MODERATOR") ||
@@ -48,11 +47,9 @@ export default function App() {
       setShowModeratorBoard(false);
       setShowAdmin(false);
     }
-
     EventBus.on("logout", () => {
       logOut();
     });
-
     return () => {
       EventBus.remove("logout");
     };
@@ -61,27 +58,17 @@ export default function App() {
   if (!currentUser) {
     return <Login />;
   }
-
-  // if (!isLoggedIn || AuthVerify(currentUser)) {
-  //   console.log(currentUser);
-  //   return (
-  //     <Router history={history}>
-
-  //     </Router>
-  //   );
-  // }
-  // if (currentUser.workspace_map.length > 0) {
-  //   return (
-  //     <SelectWorkspace
-  //       workspaces={currentUser.workspace_map}
-  //       selected={selectWorkspace}
-  //     />
-  //   );
-  // }
-  //  <Switch>
-  //<Route exact path="/login" component={Login} />
-  //</Switch>
-
+  if (!workspaceSelected && currentUser.workspace_map.length > 0) {
+    return (
+      <ThemeProvider theme={theme}>
+        <SelectWorkspace
+          workspaces={currentUser.workspace_map}
+          selected={selectWorkspace}
+          isselected={selected}
+        />
+      </ThemeProvider>
+    );
+  }
   return (
     <Router history={history}>
       <ThemeProvider theme={theme}>

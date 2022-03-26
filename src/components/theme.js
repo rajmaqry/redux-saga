@@ -17,7 +17,7 @@ export const APaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: "center",
   color: theme.palette.text.secondary,
-  height: 100,
+  height: 300,
   lineHeight: "80px"
 }));
 

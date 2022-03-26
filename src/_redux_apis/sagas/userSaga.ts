@@ -19,7 +19,7 @@ import reduxSaga, { runSaga, SagaIterator } from "redux-saga";
 import { AssertAction } from "../models/common";
 import { IUserRequest } from "../models/user";
 const dumUser =
-  '{"data" : { "user_id": "demo","view_page_permissions": ["*"], "role_mappings":["*"], "password": "string", "password_last_changed": "24031022010123","first_name": "demo","last_name": "user","workspace_map": [{"workspace_id":"aa877s00-009nnuuw-12yby7q6hbu-0982113buss","workspace_name":"DemoWorkspace"}],"token":"223349jiji99220ijij00a81wss"}}';
+  '{"data" : { "user_id": "demo","view_page_permissions": ["*"], "role_mappings":["*"], "password": "string", "password_last_changed": "24031022010123","first_name": "demo","last_name": "user","workspace_map": [{"workspace_id":"aa877s00-009nnuuw-12yby7q6hbu-0982113buss","workspace_name":"DemoWorkspace"},{"workspace_id":"aa877s00-009nnuuw-12yby7q6hbu-0982113buss","workspace_name":"DemoWorkspace"}],"token":"223349jiji99220ijij00a81wss"}}';
 function* fetchUserSaga(action: AssertAction) {
   try {
     const userReq = JSON.stringify(action.payload);
