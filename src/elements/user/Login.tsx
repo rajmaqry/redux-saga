@@ -38,11 +38,12 @@ const Login = (props) => {
   // }, [user]);
   useEffect(() => {
     // console.log("LOGIN:::" + JSON.stringify(user));
-  }, [user]);
+    //e.preventDefault();
+    fetchUserRequest(userName, password);
+  }, [submit]);
   const signIn = (e) => {
     e.preventDefault();
     setSubmit(true);
-    fetchUserRequest(userName, password);
     //window.location.reload();
     //console.log("LOGIN:::" + JSON.stringify(user));
     //props.setUser(user);
