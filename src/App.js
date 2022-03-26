@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Analytics from "./elements/analytics/Analytics";
 import DataIngestion from "./elements/data/DataIngestion";
 import NavBar from "./nav/NavBar";
+import Box from "@mui/material/Box";
 import {
   BrowserRouter as Router,
   Route,
