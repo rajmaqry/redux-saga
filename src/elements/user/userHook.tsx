@@ -17,6 +17,7 @@ function useUser() {
   const logOut = () => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("token");
+    //
   };
 
   const saveUser = () => {

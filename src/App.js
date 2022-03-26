@@ -19,6 +19,7 @@ import { history } from "./util/history";
 import EventBus from "./elements/user/EventBus";
 import AuthVerify from "./elements/user/AuthVerify";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const theme = createTheme();
 
 export default function App() {
@@ -28,7 +29,12 @@ export default function App() {
   const [workspaceSelected, selected] = React.useState(false);
   const [moderator, setShowModeratorBoard] = React.useState(false);
   const [admin, setShowAdmin] = React.useState(false);
-
+  //const history = useNavigate();
+  //const logout = () => {
+  //  sessionStorage.removeItem("user");
+  //  sessionStorage.removeItem("token");
+  //  return <Router history={history}>{history("/login")}</Router>;
+  // };
   useEffect(() => {
     history.listen((location) => {
       console.log(location);
@@ -58,7 +64,11 @@ export default function App() {
   }, [currentUser, logOut]);
 
   if (!currentUser) {
-    return <Login />;
+    return (
+      <Router history={history}>
+        <Login />
+      </Router>
+    );
   }
   if (!workspaceSelected && currentUser.workspace_map.length > 0) {
     return (
@@ -92,6 +102,7 @@ export default function App() {
           <Route path="/sql" element={<Analytics />} />
           <Route path="/jobs" element={<Analytics />} />
           <Route path="/tasks" element={<Analytics />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<> not found</>} />
         </Routes>
       </NavBar>
