@@ -65,6 +65,7 @@ export default function App() {
           workspaces={currentUser.workspace_map}
           selected={selectWorkspace}
           isselected={selected}
+          user={currentUser}
         />
       </ThemeProvider>
     );

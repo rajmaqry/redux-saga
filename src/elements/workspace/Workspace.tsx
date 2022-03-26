@@ -31,10 +31,13 @@ export const SelectWorkspace = (props) => {
 
   const createWorkSpace = (e, name) => {
     console.log(name);
-    const new_workSpace: IWorkSpaceMap = {};
-    props.workspaces.push(
-      "{'workspace_id: 3343322','workspace_name:'" + name + "}"
-    );
+    const new_workSpace: IWorkSpaceMap = {
+      workspace_id: name,
+      workspace_name: name,
+      create_by: props.user.user_id,
+      created_at: "new"
+    };
+    props.workspaces.push(new_workSpace);
     console.log(props.workspaces);
     setOpen(false);
   };

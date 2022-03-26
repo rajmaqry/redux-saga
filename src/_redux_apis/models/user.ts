@@ -13,6 +13,8 @@ export interface IUser {
 export interface IWorkSpaceMap {
   workspace_id: string;
   workspace_name: string;
+  create_by?: string;
+  created_at?: string;
 }
 
 export interface IUserRequest {
