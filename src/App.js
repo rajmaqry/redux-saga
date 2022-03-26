@@ -62,14 +62,16 @@ export default function App() {
   }
   if (!workspaceSelected && currentUser.workspace_map.length > 0) {
     return (
-      <ThemeProvider theme={theme}>
-        <SelectWorkspace
-          workspaces={currentUser.workspace_map}
-          selected={selectWorkspace}
-          isselected={selected}
-          user={currentUser}
-        />
-      </ThemeProvider>
+      <Router history={history}>
+        <ThemeProvider theme={theme}>
+          <SelectWorkspace
+            workspaces={currentUser.workspace_map}
+            selected={selectWorkspace}
+            isselected={selected}
+            user={currentUser}
+          />
+        </ThemeProvider>
+      </Router>
     );
   }
   return (
@@ -77,10 +79,9 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <HeaderBar />
       </ThemeProvider>
-
       <NavBar>
         <Routes>
-          <Route path="/" element={<p>ok</p>} />
+          <Route path="/home" element={<p>This is BaseCamp</p>} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/compute" element={<Analytics />} />
           <Route path="/dataconfig" element={<p />} />

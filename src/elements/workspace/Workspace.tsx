@@ -8,6 +8,7 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { IWorkSpaceMap } from "../../_redux_apis/models/user";
 import { useActions } from "../../_redux_apis/actions/callActions";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -57,11 +58,13 @@ export const CreatetWorkspace = (props) => {
 };
 
 export const SelectWorkspace = (props) => {
+  const history = useNavigate();
   const [open, setOpen] = React.useState(false);
   const { createWsRequest } = useActions();
   const handleSelect = (e, id) => {
     props.selected(id);
     props.isselected(true);
+    history("/home");
   };
 
   const handleCreate = (e) => {
