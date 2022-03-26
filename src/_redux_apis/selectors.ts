@@ -11,7 +11,6 @@ export const getUser = (state: State): IUser => state.user;
 
 export const loading = (state: State): boolean | undefined => state.loading;
 
-export const getIsloggedIn = (state: State): boolean | undefined =>
-  state.isLoggedIn ? state.isLoggedIn : false;
+export const getIsloggedIn = (state: State): boolean => state.isLoggedIn;
 export const getMessage = (state: State): string | undefined =>
   state.error ? state.error : "";

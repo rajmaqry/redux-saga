@@ -34,6 +34,7 @@ export default function App() {
   }, []);
   useEffect(() => {
     console.log("CALLED" + currentUser?.token);
+    console.log("CALLED::" + isLoggedIn);
     if (currentUser) {
       setShowModeratorBoard(
         currentUser.role_mappings.includes("ROLE_MODERATOR") ||
