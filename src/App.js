@@ -57,7 +57,7 @@ export default function App() {
     };
   }, [currentUser, logOut]);
 
-  if (!isLoggedIn) {
+  if (!currentUser) {
     return <Login />;
   }
 
