@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import postReducer from "./post_reducers/postReducer";
-import userReducer from "./user_reducers/userReducer";
+import sessionReducer from "./sessionReducer";
 
 const combReducer = combineReducers({
   posts: postReducer,
-  user: userReducer
+  user: sessionReducer
 });
 
 export default combReducer;

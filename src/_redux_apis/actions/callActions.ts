@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchPostRequest } from "./postAction";
 import { fetchUserRequest } from "./userAction";
-
+import { createWsRequest } from "./workspaceAction";
 const actionCreator = {
   fetchPostRequest,
-  fetchUserRequest
+  fetchUserRequest,
+  createWsRequest
 };
 
 export const useActions = () => {

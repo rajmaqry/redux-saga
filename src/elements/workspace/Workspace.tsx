@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { IWorkSpaceMap } from "../../_redux_apis/models/user";
+import { useActions } from "../../_redux_apis/actions/callActions";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -18,8 +20,45 @@ const style = {
   boxShadow: 24,
   p: 4
 };
+export const CreatetWorkspace = (props) => {
+  const [workspaceName, setName] = React.useState("");
+  return (
+    <div>
+      <Modal
+        open={props.open}
+        onClose={props.handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Enter Workspace Name
+          </Typography>
+          <TextField
+            label="Workspace Name"
+            placeholder="Workspace Name"
+            fullWidth
+            required
+            onChange={(e) => setName(e.target.value)}
+            sx={{ marginBottom: "10px" }}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            onClick={(e) => props.createWorkSpace(e, workspaceName)}
+          >
+            Create
+          </Button>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
+
 export const SelectWorkspace = (props) => {
   const [open, setOpen] = React.useState(false);
+  const { createWsRequest } = useActions();
   const handleSelect = (e, id) => {
     props.selected(id);
     props.isselected(true);
@@ -31,14 +70,7 @@ export const SelectWorkspace = (props) => {
 
   const createWorkSpace = (e, name) => {
     console.log(name);
-    const new_workSpace: IWorkSpaceMap = {
-      workspace_id: name,
-      workspace_name: name,
-      create_by: props.user.user_id,
-      created_at: "new"
-    };
-    props.workspaces.push(new_workSpace);
-    console.log(props.workspaces);
+    createWsRequest(props.user.user_id, name);
     setOpen(false);
   };
   React.useEffect(() => {
@@ -73,41 +105,5 @@ export const SelectWorkspace = (props) => {
         handleClose={createWorkSpace}
       />
     </>
-  );
-};
-
-export const CreatetWorkspace = (props) => {
-  const [workspaceName, setName] = React.useState("");
-  return (
-    <div>
-      <Modal
-        open={props.open}
-        onClose={props.handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Enter Workspace Name
-          </Typography>
-          <TextField
-            label="Workspace Name"
-            placeholder="Workspace Name"
-            fullWidth
-            required
-            onChange={(e) => setName(e.target.value)}
-            sx={{ marginBottom: "10px" }}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            onClick={(e) => props.createWorkSpace(e, workspaceName)}
-          >
-            Create
-          </Button>
-        </Box>
-      </Modal>
-    </div>
   );
 };

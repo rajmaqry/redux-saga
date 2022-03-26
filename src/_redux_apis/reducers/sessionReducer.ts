@@ -1,7 +1,9 @@
-import { State, defaultState } from "../state";
-import { UserActions } from "../../actions/userAction";
-import { AssertAction } from "../../models/common";
-import { IUser } from "../../models/user";
+import { State, defaultState } from "./state";
+import { UserActions } from "../actions/userAction";
+import { AssertAction } from "../models/common";
+import { IUser } from "../models/user";
+import { WsActions } from "../actions/workspaceAction";
+import { IWorkSpaceMap } from "../models/user";
 const release_inprogress = (state: State, actionType: string): string[] => {
   const set = new Set<string>(state.inprogress);
   set.delete(actionType);
@@ -33,6 +35,32 @@ export default (state: State = defaultState, action: AssertAction): State => {
         inprogress: release_inprogress(state, UserActions.FETCH_USER_REQUEST)
       };
     case UserActions.FETCH_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        isLoggedIn: false,
+        error: action.payload.error
+      };
+    case WsActions.CREATE_WS_REQUEST:
+      //state.user.workspace_map.push(ws);
+      console.log(state);
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        inprogress: release_inprogress(state, WsActions.CREATE_WS_REQUEST)
+      };
+    case WsActions.CREATE_WS_SUCCESS:
+      const ws: IWorkSpaceMap = action.payload;
+      state.user.workspace_map.push(ws);
+      console.log(state);
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        inprogress: release_inprogress(state, WsActions.CREATE_WS_REQUEST)
+      };
+    case WsActions.CREATE_WS_FAILURE:
       return {
         ...state,
         loading: false,
