@@ -39,11 +39,11 @@ const Login = (props) => {
   useEffect(() => {
     // console.log("LOGIN:::" + JSON.stringify(user));
     //e.preventDefault();
-    fetchUserRequest(userName, password);
   }, [submit]);
   const signIn = (e) => {
     e.preventDefault();
     setSubmit(true);
+    fetchUserRequest(userName, password);
     //window.location.reload();
     //console.log("LOGIN:::" + JSON.stringify(user));
     //props.setUser(user);

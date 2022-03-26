@@ -33,6 +33,7 @@ export default function App() {
     });
   }, []);
   useEffect(() => {
+    console.log("CALLED" + currentUser?.token);
     if (currentUser) {
       setShowModeratorBoard(
         currentUser.role_mappings.includes("ROLE_MODERATOR") ||
@@ -102,10 +103,6 @@ export default function App() {
           <Route path="*" element={<> not found</>} />
         </Routes>
       </NavBar>
-
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
     </Router>
   );
 }
