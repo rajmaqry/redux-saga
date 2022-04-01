@@ -9,6 +9,8 @@ import BeenhereIcon from "@mui/icons-material/Beenhere";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import AirIcon from "@mui/icons-material/Air";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import SettingsIcon from "@mui/icons-material/Settings";
 export const routes = [
   {
     path: "/",
@@ -64,5 +66,21 @@ export const routes = [
     path: "/tasks",
     name: "Tasks",
     icon: <ListAltIcon />
+  }
+];
+
+export const userroutes = [
+  {
+    path: "/workspaces",
+    name: "Workspace",
+    icon: <WorkspacesIcon />,
+    isloginRequire: true
+  },
+
+  {
+    path: "/usersettings",
+    name: "Settings",
+    icon: <SettingsIcon />,
+    isloginRequire: true
   }
 ];

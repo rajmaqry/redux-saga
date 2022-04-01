@@ -16,8 +16,9 @@ import ListItemText from "@mui/material/ListItemText";
 import MuiListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
-import { routes } from "./rconf";
+import { routes, userroutes } from "./rconf";
 import { useOktaAuth } from "@okta/okta-react";
+import { AndroidSharp } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -200,7 +201,6 @@ export default function NavBar({ children }) {
                   font: "Roboto",
                   color: "#26c6da"
                 }}
-                disabled={!loggedIn}
               >
                 <ListItem
                   selected={selectedIndex === index}
@@ -232,6 +232,49 @@ export default function NavBar({ children }) {
             ))}
           </List>
           <Divider />
+          <span />
+          <span />
+          <List style={{ "margin-top": "60px" }}>
+            {userroutes.map((route, index) => (
+              <Link
+                to={route.path}
+                key={index}
+                style={{
+                  textDecoration: "none",
+                  font: "Roboto",
+                  color: "#26c6da",
+                  display: route.isloginRequire && !loggedIn ? "none" : "block"
+                }}
+              >
+                <ListItem
+                  selected={selectedIndex === index}
+                  onClick={(event) => handleListItemClick(event, index)}
+                  key={index}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5
+                  }}
+                >
+                  <ListItemIcon
+                    onMouseOver={() => sethover(true)}
+                    onMouseOut={() => sethover(false)}
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center"
+                    }}
+                  >
+                    {route.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={route.name}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
         </Drawer>
       </Box>
       <Box
