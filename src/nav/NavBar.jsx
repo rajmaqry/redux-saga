@@ -135,9 +135,14 @@ export default function NavBar({ children }) {
     setOpen(false);
   };
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
-
+  const [selectedIndexLog, setSelectedIndexLog] = React.useState(-1);
+  const handleSelect = (event, index) => {
+    setSelectedIndexLog(index);
+    setSelectedIndex(-1);
+  };
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+    setSelectedIndexLog(-1);
   };
   const [hover, sethover] = React.useState(false);
   return (
@@ -234,7 +239,7 @@ export default function NavBar({ children }) {
           <Divider />
           <span />
           <span />
-          <List style={{ "margin-top": "60px" }}>
+          <List style={{ "margin-top": "30px" }}>
             {userroutes.map((route, index) => (
               <Link
                 to={route.path}
@@ -247,8 +252,8 @@ export default function NavBar({ children }) {
                 }}
               >
                 <ListItem
-                  selected={selectedIndex === index}
-                  onClick={(event) => handleListItemClick(event, index)}
+                  selected={selectedIndexLog === index}
+                  onClick={(event) => handleSelect(event, index)}
                   key={index}
                   sx={{
                     minHeight: 48,
