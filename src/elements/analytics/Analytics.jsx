@@ -7,14 +7,8 @@ import { useOktaAuth } from "@okta/okta-react";
 import { toRelativeUrl } from "@okta/okta-auth-js";
 const Analytics = () => {
   const { oktaAuth, authState } = useOktaAuth();
-  const login = async () => {
-    await oktaAuth.signInWithRedirect();
-  };
-  const logout = async () => {
-    await oktaAuth.signOut();
-  };
+
   if (!authState || !authState?.isAuthenticated) {
-    window.alert(authState);
     const originalUri = toRelativeUrl(
       window.location.href,
       window.location.origin

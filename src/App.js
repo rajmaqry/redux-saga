@@ -32,6 +32,29 @@ export default function App() {
     clientId: "0oa4gxupzsK8cXXxh5d7",
     redirectUri: `${window.location.origin}/auth/callback`
   });
+  const renderError = (props) => {
+    const { error } = props;
+    if (error) {
+      const { name, errorCode, errorSummary } = error;
+
+      if (errorCode === "access_denied") {
+        // customized error handling
+        return (
+          <div>
+            <p>You haven't been assigned to this app yet.</p>
+          </div>
+        );
+      }
+      // genric error handling
+      return (
+        <div>
+          <p>{`[${name}: ${errorSummary}]`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
   sessionStorage.clear();
   const { token, setUser, currentUser, isLoggedIn, logOut } = useUser();
   const [workspace, selectWorkspace] = React.useState("");
@@ -121,6 +144,7 @@ export default function App() {
             path="/auth/callback"
             element={
               <LoginCallback
+                errorComponent={renderError}
                 loadingElement={<h3 id="loading-icon">Loading...</h3>}
               />
             }

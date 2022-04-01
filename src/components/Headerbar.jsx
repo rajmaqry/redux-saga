@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import basetheme from "./theme";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { makeStyles } from "@mui/styles";
+import { useOktaAuth } from "@okta/okta-react";
+import { toRelativeUrl } from "@okta/okta-auth-js";
 //import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +47,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 ////className={clsx(classes.appBar)}
 export default function HeaderBar() {
+  const { oktaAuth, authState } = useOktaAuth();
+
+  const login = async () => {
+    const originalUri = toRelativeUrl(
+      window.location.href,
+      window.location.origin
+    );
+    oktaAuth.setOriginalUri(originalUri);
+    await oktaAuth.signInWithRedirect();
+  };
+  const logout = async () => {
+    await oktaAuth.signOut();
+  };
+  const logButton =
+    !authState || !authState?.isAuthenticated ? (
+      <Button color="inherit" onClick={login}>
+        Sign In
+      </Button>
+    ) : (
+      <Button color="inherit" onClick={logout}>
+        Logout
+      </Button>
+    );
   const classes = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -72,6 +97,7 @@ export default function HeaderBar() {
             A S S E R T
           </Typography>
           <Button color="inherit">About</Button>
+          {logButton}
         </Toolbar>
       </AppBar>
     </Box>

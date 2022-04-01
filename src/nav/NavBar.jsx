@@ -17,6 +17,7 @@ import MuiListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import { routes } from "./rconf";
+import { useOktaAuth } from "@okta/okta-react";
 
 const drawerWidth = 240;
 
@@ -69,6 +70,17 @@ const Drawer = styled(MuiDrawer, {
 }));
 const ListItem = withStyles({
   root: {
+    "&$disabled": {
+      backgroundColor: "grey !important",
+      color: "white",
+      "border-right": "5px solid black",
+      "& .MuiListItemIcon-root": {
+        color: "white"
+      },
+      "& MuiListItem-root.Mui-selected": {
+        backgroundColor: "red"
+      }
+    },
     "&$selected": {
       backgroundColor: "red !important",
       color: "white",
@@ -108,6 +120,8 @@ const useStyles = styled((theme) => ({
   }
 }));
 export default function NavBar({ children }) {
+  const { oktaAuth, authState } = useOktaAuth();
+  const loggedIn = !authState || !authState?.isAuthenticated ? false : true;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -119,7 +133,7 @@ export default function NavBar({ children }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -186,6 +200,7 @@ export default function NavBar({ children }) {
                   font: "Roboto",
                   color: "#26c6da"
                 }}
+                disabled={!loggedIn}
               >
                 <ListItem
                   selected={selectedIndex === index}
