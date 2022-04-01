@@ -49,28 +49,28 @@ export default function App() {
   //    console.log(location);
   //  });
   //}, [workspaceSelected]);
-  useEffect(() => {
-    if (currentUser) {
-      setUser();
-      setShowModeratorBoard(
-        currentUser.role_mappings.includes("ROLE_MODERATOR") ||
-          currentUser.role_mappings.includes("*")
-      );
-      setShowAdmin(
-        currentUser.role_mappings.includes("ROLE_ADMIN") ||
-          currentUser.role_mappings.includes("*")
-      );
-    } else {
-      setShowModeratorBoard(false);
-      setShowAdmin(false);
-    }
-    EventBus.on("logout", () => {
-      logOut();
-    });
-    return () => {
-      EventBus.remove("logout");
-    };
-  }, [currentUser, logOut]);
+  //useEffect(() => {
+  //  if (currentUser) {
+  //     setUser();
+  //    setShowModeratorBoard(
+  //      currentUser.role_mappings.includes("ROLE_MODERATOR") ||
+  //        currentUser.role_mappings.includes("*")
+  //     );
+  //     setShowAdmin(
+  //       currentUser.role_mappings.includes("ROLE_ADMIN") ||
+  //         currentUser.role_mappings.includes("*")
+  //    );
+  //  } else {
+  //     setShowModeratorBoard(false);
+  //     setShowAdmin(false);
+  //   }
+  //   EventBus.on("logout", () => {
+  //     logOut();
+  //   });
+  //   return () => {
+  //      EventBus.remove("logout");
+  //   };
+  // }, [currentUser, logOut]);
 
   // if (!currentUser) {
   //   return (
